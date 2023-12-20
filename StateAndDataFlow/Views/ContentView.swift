@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let storageManager = StorageManager.shared
+    
     @StateObject private var timer = TimeCounter()
     @EnvironmentObject private var userManager: UserManager
-    
+
     var body: some View {
         VStack {
             Text("Hi, \(userManager.name)")
@@ -41,6 +43,8 @@ struct ContentView: View {
     private func logOut() {
         userManager.name = ""
         userManager.isLoggedIn = false
+        
+        storageManager.delete()
     }
 }
 

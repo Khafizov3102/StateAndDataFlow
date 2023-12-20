@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var userManager = UserManager()
+//    @StateObject private var userManager = UserManager()
+    let storageManager = StorageManager.shared
+    
+    @StateObject private var userManager = UserManager(
+        isLoggedIn: UserDefaults.standard.value(forKey: "isLoginKey") as? Bool ?? false,
+        name: UserDefaults.standard.value(forKey: "userKey") as? String ?? ""
+    )
     
     var body: some View {
         Group {
